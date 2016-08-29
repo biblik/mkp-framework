@@ -48,7 +48,7 @@ Run this command (this command will show the help). To run the code under Window
 2. Compil the project
 `javac -d "./bin" ./src/edu/emn/*.java` 
 3. Run the program  
-`java edu.emn.tsp.Main -help `
+`java edu.emn.mkp.Main -help `
 
 #INSTANCES
 
