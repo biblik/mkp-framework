@@ -42,14 +42,14 @@ public class Instance {
     // --------------- ATTRIBUTES ------------------
     // ---------------------------------------------
 
-    /** Number of objects */
-    private int m_nbObjects;
+    /** Number of items */
+    private int m_nbItems;
 
     /** Number of constraints */
     private int m_nbConstraints;
 
-    /** Value of each object */
-    private Integer[] m_value;
+    /** Profit of each item */
+    private Integer[] m_profit;
 
     /** Capacity of each constraint */
     private Integer[] m_capacity;
@@ -65,10 +65,10 @@ public class Instance {
     // --------------------------------------------
 
     /** 
-     * @return The number of objects in the problem
+     * @return The number of items in the problem
      */
-    public int getNbObjects() {
-	return m_nbObjects;
+    public int getNbItems() {
+	return m_nbItems;
     }
 
     /** 
@@ -79,18 +79,18 @@ public class Instance {
     }
 
     /**
-     * @param j Index of the object (index must be between 0 and the number of objects -1).
-     * @return The value of object j.
+     * @param j Index of the item (index must be between 0 and the number of items -1).
+     * @return The profit of item j.
      * @throws Exception Throw an exception if index j is not a valid object.
      */
-    public int getValue(int j) throws Exception {
-	if ((j < 0) || (j >= m_nbObjects))
-	    throw new Exception("Error: " + j + " n\'is not an index of object between 0 and " + (m_nbObjects - 1));
-	return m_value[j];
+    public int getProfit(int j) throws Exception {
+	if ((j < 0) || (j >= m_nbItems))
+	    throw new Exception("Error: " + j + " n\'is not an index of item between 0 and " + (m_nbItems - 1));
+	return m_profit[j];
     }
 
     /**
-     * @param i Index of the object (index must be between 0 and the number of constraints -1).
+     * @param i Index of the constraint (index must be between 0 and the number of constraints -1).
      * @return The capacity of constraint i.
      * @throws Exception Throw an exception if index i is not a valid constraint.
      */
@@ -101,14 +101,14 @@ public class Instance {
     }
 
     /**
-     * @param j Index of the object (index must be between 0 and the number of constraints -1).
+     * @param j Index of the item (index must be between 0 and the number of items -1).
      * @param i Index of the object (index must be between 0 and the number of constraints -1).
      * @return The weight of object j in constraint i.
      * @throws Exception Throw an exception if indices i and j are not valid.
      **/
     public Integer getWeight(int j, int i) throws Exception {
-	if ((j < 0) || (j >= m_nbObjects))
-	    throw new Exception("Error: " + j + " n\'is not an index of object between 0 and " + (m_nbObjects - 1));
+	if ((j < 0) || (j >= m_nbItems))
+	    throw new Exception("Error: " + j + " n\'is not an index of item between 0 and " + (m_nbItems - 1));
 	if ((i < 0) || (i >= m_nbConstraints))
 	    throw new Exception("Error: " + i + " n\'is not an index of constraint between 0 and " + (m_nbConstraints - 1));
 	return m_weight_ji[j][i];
@@ -163,7 +163,7 @@ public class Instance {
 
 	String line = sc.nextLine();
 	Scanner lineSc = new Scanner(line);
-	m_nbObjects = lineSc.nextInt();
+	m_nbItems = lineSc.nextInt();
 	m_nbConstraints = lineSc.nextInt();
 
 	lineSc.close();
@@ -171,21 +171,21 @@ public class Instance {
 	line = sc.nextLine();
 	lineSc = new Scanner(line);
 
-	// Create value for each object
-	m_value = new Integer[m_nbObjects];
-	for (int j = 0; j < m_nbObjects; j++) {
+	// Create profit for each object
+	m_profit = new Integer[m_nbItems];
+	for (int j = 0; j < m_nbItems; j++) {
 	    if (!lineSc.hasNextInt()) {
 		line = sc.nextLine();
 		lineSc = new Scanner(line);
 	    }
-	    m_value[j] = lineSc.nextInt();
+	    m_profit[j] = lineSc.nextInt();
 	}
 
 	// Create weights matrix
-	m_weight_ji= new Integer[m_nbObjects][m_nbConstraints];
+	m_weight_ji= new Integer[m_nbItems][m_nbConstraints];
 	// Read the matrix
 	for (int i = 0; i < m_nbConstraints; i++) {
-	    for (int j = 0; j < m_nbObjects; j++) {
+	    for (int j = 0; j < m_nbItems; j++) {
 		if (!lineSc.hasNextInt()) {
 		    line = sc.nextLine();
 		    lineSc = new Scanner(line);
@@ -217,7 +217,7 @@ public class Instance {
 
 	out.println("Weights matrix :");
 	for (int i = 0; i < m_nbConstraints; i++) {
-	    for (int j = 0; j < m_nbObjects; j++) {
+	    for (int j = 0; j < m_nbItems; j++) {
 		out.print(m_weight_ji[j][i] + ";");
 	    }
 	    out.println();

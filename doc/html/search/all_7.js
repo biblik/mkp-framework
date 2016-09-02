@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['removeobject',['removeObject',['../classedu_1_1emn_1_1mkp_1_1Solution.html#acb44b6f0540183486e758787e3fbf8fb',1,'edu::emn::mkp::Solution']]]
+  ['removeitem',['removeItem',['../classedu_1_1emn_1_1mkp_1_1Solution.html#abf757e85f13c7ceff84baa921d910bef',1,'edu::emn::mkp::Solution']]]
 ];

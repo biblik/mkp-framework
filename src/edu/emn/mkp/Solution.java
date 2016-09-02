@@ -37,8 +37,8 @@ public class Solution {
 
     /**
      * Solution stored in an array. Element j in the array is:
-     *  - <code>true</code> object j is in the solution;
-     *  - <code>false</code> object j is not in the solution.
+     *  - <code>true</code> item j is in the solution;
+     *  - <code>false</code> item j is not in the solution.
      *  
      * @warning Do not modify the behaviour of this attribute
      */
@@ -52,19 +52,19 @@ public class Solution {
     protected long m_objective = 0;
 
     /** 
-     * Sum of the weights of the objects in the knapsack following each dimension.
+     * Sum of the weights of the items in the knapsack following each dimension.
      * For a solution, the computation of each weight is performed in {@link #validate()}.
      * 
      * <b> For computational requirement, update this attribute iteratively with method {@link #setWeight(int, long)}.
-     * For further examples, see {@link #addObject(int)} or {@link #removeObject(int))} </b>.  
+     * For further examples, see {@link #addItem(int)} or {@link #removeItem(int))} </b>.  
      */
     protected long[] m_weights;
 
     /** Data of the problem associated with the solution */
     protected Instance m_instance;
 
-    /** Number of objects in the problem. */
-    protected int m_nbObjects;
+    /** Number of items in the problem. */
+    protected int m_nbItems;
 
     /** Number of constraints in the problem. */
     protected int m_nbConstraints;
@@ -100,7 +100,7 @@ public class Solution {
 
     /**
      * @param i The dimension selected.
-     * @return The weight of the objects in the knapsack for dimension i.
+     * @return The weight of the items in the knapsack for dimension i.
      */
     public long getWeight(int i) {
 	return m_weights[i];
@@ -124,13 +124,13 @@ public class Solution {
     }
 
     /**
-     * @param j Object for whom one want to know if it is selected or not.
-     * @return <code>true</code> if the object is selected <code>false</code> otherwise.
-     * @throws Exception Throw an exception if index of object is wrong.
+     * @param j Item for whom one want to know if it is selected or not.
+     * @return <code>true</code> if the item is selected <code>false</code> otherwise.
+     * @throws Exception Throw an exception if index of item is wrong.
      */
     public boolean isSelected(int j) throws Exception {
-	if ((j < 0) || (j > m_nbObjects))
-	    throw new Exception("Error: " + j + " n\'is not an index of object between 0 and " + (m_nbObjects - 1));
+	if ((j < 0) || (j > m_nbItems))
+	    throw new Exception("Error: " + j + " n\'is not an index of item between 0 and " + (m_nbItems - 1));
 	return m_solution[j];
     }
 
@@ -151,9 +151,9 @@ public class Solution {
      */
     public Solution(Instance inst) {
 	m_instance = inst;
-	m_nbObjects = inst.getNbObjects();
+	m_nbItems = inst.getNbItems();
 	m_nbConstraints = inst.getNbConstraints();
-	m_solution = new boolean[m_nbObjects];
+	m_solution = new boolean[m_nbItems];
 	Arrays.fill(m_solution, false);
 	m_weights = new long[m_instance.getNbConstraints()];
 	Arrays.fill(m_weights, 0);
@@ -170,46 +170,46 @@ public class Solution {
      */
     public Solution clone() {
 	Solution solution = new Solution(m_instance);
-	solution.m_nbObjects = m_instance.getNbObjects();
+	solution.m_nbItems = m_instance.getNbItems();
 	solution.m_nbConstraints = m_instance.getNbConstraints();
 	solution.m_objective = m_objective;
-	solution.m_solution = Arrays.copyOf(m_solution, m_nbObjects);
+	solution.m_solution = Arrays.copyOf(m_solution, m_nbItems);
 	solution.m_weights = Arrays.copyOf(m_weights,m_instance.getNbConstraints());
 	solution.m_error = new String(m_error); 
 	return solution;	  
     }
 
     /**
-     * Set the weight of object j to value.
+     * Set the weight of item j to value.
      * 
      * @warning This method does not modify the weights of each dimension. Theses updates need to be perform with
      * the corresponding methods.
      * 
-     * @param j index of object
+     * @param j index of item
      * @param value <code>true</code> or <code>false</code>
-     * @throws Exception Throw an exception if index j is not a valid object.
+     * @throws Exception Throw an exception if index j is not a valid item.
      */
-    public void setObjectWeight(int j, boolean value) throws Exception {
-	if ((j < 0) || (j >= m_nbObjects))
-	    throw new Exception("Error: " + j + " n\'is not an index of object between 0 and " + (m_nbObjects - 1));
+    public void setItemWeight(int j, boolean value) throws Exception {
+	if ((j < 0) || (j >= m_nbItems))
+	    throw new Exception("Error: " + j + " n\'is not an index of item between 0 and " + (m_nbItems - 1));
 	m_solution[j] = value;
     }
 
     /**
-     * Add object j to the knapsack (do nothing if object is already in the knapsack).
+     * Add item j to the knapsack (do nothing if item is already in the knapsack).
      * Update the objective value and the weights on each dimension
      * 
      * @param j Index of object to add.
-     * @throws Exception Throw an exception if index j is not a valid object.
+     * @throws Exception Throw an exception if index j is not a valid item.
      */
-    public void addObject(int j) throws Exception {
-	if ((j < 0) || (j >= m_nbObjects))
-	    throw new Exception("Error: " + j + " n\'is not an index of object between 0 and " + (m_nbObjects - 1));
+    public void addItem(int j) throws Exception {
+	if ((j < 0) || (j >= m_nbItems))
+	    throw new Exception("Error: " + j + " n\'is not an index of item between 0 and " + (m_nbItems - 1));
 
 	if (m_solution[j] == false ) {
 	    m_solution[j] = true;		
 
-	    m_objective += m_instance.getValue(j);
+	    m_objective += m_instance.getProfit(j);
 
 	    for (int i = 0; i < m_instance.getNbConstraints(); i++) {
 		m_weights[i] += m_instance.getWeight(j, i);
@@ -218,20 +218,20 @@ public class Solution {
     }
 
     /**
-     * Remove object j to the knapsack (do nothing if object is already in the knapsack).
+     * Remove item j to the knapsack (do nothing if item is already in the knapsack).
      * Update the objective value and the weights on each dimension
      * 
-     * @param j Index of object to remove.
-     * @throws Exception Throw an exception if index j is not a valid object. 
+     * @param j Index of item to remove.
+     * @throws Exception Throw an exception if index j is not a valid item. 
      */
-    public void removeObject(int j) throws Exception {
-	if ((j < 0) || (j > +m_nbObjects))
-	    throw new Exception("Error: " + j + " n\'is not an index of object between 0 and " + (m_nbObjects - 1));
+    public void removeItem(int j) throws Exception {
+	if ((j < 0) || (j > +m_nbItems))
+	    throw new Exception("Error: " + j + " n\'is not an index of item between 0 and " + (m_nbItems - 1));
 
 	if (m_solution[j] == true ) {
 	    m_solution[j] = false;		
 
-	    m_objective -= m_instance.getValue(j);
+	    m_objective -= m_instance.getProfit(j);
 
 	    for (int i = 0; i < m_instance.getNbConstraints(); i++) {
 		m_weights[i] -= m_instance.getWeight(j, i);
@@ -240,15 +240,15 @@ public class Solution {
     }
 
     /**
-     * Check if adding object j violate or not the constraints.
+     * Check if adding item j violate or not the constraints.
      * 
-     * @param j Index of object to remove.
+     * @param j Index of item to add.
      * @return <code>true</code>if adding is possible or <code>false</code>
-     * @throws Exception Throw an exception if index j is not an object. 
+     * @throws Exception Throw an exception if index j is not an item. 
      */
     public boolean addingPossible(int j) throws Exception {
-	if ((j < 0) || (j > m_nbObjects))
-	    throw new Exception("Error: " + j + " n\'is not an index of object between 0 and " + (m_nbObjects - 1));
+	if ((j < 0) || (j > m_nbItems))
+	    throw new Exception("Error: " + j + " n\'is not an index of item between 0 and " + (m_nbItems - 1));
 
 	for (int i = 0; i < m_nbConstraints; i++) {
 	    if ( m_weights[i] + m_instance.getWeight(j, i) > m_instance.getCapacity(i))
@@ -285,9 +285,9 @@ public class Solution {
      */ 
     public double evaluate() throws Exception {
 	m_objective = 0;
-	for (int j = 0; j < m_nbObjects; j++) {
+	for (int j = 0; j < m_nbItems; j++) {
 	    if (m_solution[j]) {
-		m_objective += m_instance.getValue(j);
+		m_objective += m_instance.getProfit(j);
 	    }
 	}
 	return m_objective;
@@ -295,7 +295,7 @@ public class Solution {
 
     /**
      * Compute the value of constraint i base on actual solution
-     * (i.e. the weight of object j is add to the value of the constraint if object j is in the actual solution).
+     * (i.e. the weight of item j is add to the value of the constraint if item j is in the actual solution).
      * 
      * Update attribute <code>m_weights</code>/
      * 
@@ -307,7 +307,7 @@ public class Solution {
 	    throw new Exception("Error: " + i + " n\'is not an index of constraint between 0 and " + (m_nbConstraints - 1));
 
 	int valueConstraint = 0;
-	for (int j = 0; j < m_nbObjects; j++) {
+	for (int j = 0; j < m_nbItems; j++) {
 	    if (m_solution[j])
 		valueConstraint += m_instance.getWeight(j, i);
 	}
@@ -351,8 +351,8 @@ public class Solution {
      * @param out Output.
      */
     public void print(PrintStream out) {
-	out.println("MKP objective value: " + m_objective + "\nObjects chosen: ");
-	for (int j = 0; j < m_nbObjects; j++) {
+	out.println("MKP objective value: " + m_objective + "\nItems chosen: ");
+	for (int j = 0; j < m_nbItems; j++) {
 	    if (m_solution[j])
 		out.print(j + " / ");
 	}

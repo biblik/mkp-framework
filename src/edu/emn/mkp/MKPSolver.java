@@ -125,9 +125,9 @@ public class MKPSolver {
 
 	// Example of initial solution :
 	// add objects by natural order if possible
-	for (int j=0;j<m_instance.getNbObjects();j++) {
+	for (int j=0;j<m_instance.getNbItems();j++) {
 	    if (m_solution.addingPossible(j)) {
-		m_solution.addObject(j);
+		m_solution.addItem(j);
 	    }
 	}
 

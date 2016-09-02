@@ -94,12 +94,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa44de20f3a157f6442a8e2769d3b7be9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classedu_1_1emn_1_1mkp_1_1Instance.html#aa44de20f3a157f6442a8e2769d3b7be9">getNbObjects</a> ()</td></tr>
-<tr class="separator:aa44de20f3a157f6442a8e2769d3b7be9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d6396dafc4b20b08667c0b665eef350"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classedu_1_1emn_1_1mkp_1_1Instance.html#a8d6396dafc4b20b08667c0b665eef350">getNbItems</a> ()</td></tr>
+<tr class="separator:a8d6396dafc4b20b08667c0b665eef350"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aace0de8c4127b4e255739b4c0841c10f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classedu_1_1emn_1_1mkp_1_1Instance.html#aace0de8c4127b4e255739b4c0841c10f">getNbConstraints</a> ()</td></tr>
 <tr class="separator:aace0de8c4127b4e255739b4c0841c10f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ee29701c0d56d1344dc9bbf283d694f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classedu_1_1emn_1_1mkp_1_1Instance.html#a7ee29701c0d56d1344dc9bbf283d694f">getValue</a> (int j)  throws Exception </td></tr>
-<tr class="separator:a7ee29701c0d56d1344dc9bbf283d694f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f1f8c33b5ede9ce0ecf9aea0a5bba0d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classedu_1_1emn_1_1mkp_1_1Instance.html#a9f1f8c33b5ede9ce0ecf9aea0a5bba0d">getProfit</a> (int j)  throws Exception </td></tr>
+<tr class="separator:a9f1f8c33b5ede9ce0ecf9aea0a5bba0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ab3aa84f2a02e5e8c7dc67d0c0dcad2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classedu_1_1emn_1_1mkp_1_1Instance.html#a4ab3aa84f2a02e5e8c7dc67d0c0dcad2">getCapacity</a> (int i)  throws Exception </td></tr>
 <tr class="separator:a4ab3aa84f2a02e5e8c7dc67d0c0dcad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53dfe574d4161fc55fada84528f83c78"><td class="memItemLeft" align="right" valign="top">Integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classedu_1_1emn_1_1mkp_1_1Instance.html#a53dfe574d4161fc55fada84528f83c78">getWeight</a> (int j, int i)  throws Exception </td></tr>
@@ -166,7 +166,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">i</td><td>Index of the object (index must be between 0 and the number of constraints -1). </td></tr>
+    <tr><td class="paramname">i</td><td>Index of the constraint (index must be between 0 and the number of constraints -1). </td></tr>
   </table>
   </dd>
 </dl>
@@ -212,28 +212,28 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa44de20f3a157f6442a8e2769d3b7be9"></a>
+<a class="anchor" id="a8d6396dafc4b20b08667c0b665eef350"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int edu.emn.mkp.Instance.getNbObjects </td>
+          <td class="memname">int edu.emn.mkp.Instance.getNbItems </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>The number of objects in the problem </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of items in the problem </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a7ee29701c0d56d1344dc9bbf283d694f"></a>
+<a class="anchor" id="a9f1f8c33b5ede9ce0ecf9aea0a5bba0d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int edu.emn.mkp.Instance.getValue </td>
+          <td class="memname">int edu.emn.mkp.Instance.getProfit </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>j</em></td><td>)</td>
@@ -243,11 +243,11 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">j</td><td>Index of the object (index must be between 0 and the number of objects -1). </td></tr>
+    <tr><td class="paramname">j</td><td>Index of the item (index must be between 0 and the number of items -1). </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value of object j. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The profit of item j. </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">Exception</td><td>Throw an exception if index j is not a valid object. </td></tr>
@@ -282,7 +282,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">j</td><td>Index of the object (index must be between 0 and the number of constraints -1). </td></tr>
+    <tr><td class="paramname">j</td><td>Index of the item (index must be between 0 and the number of items -1). </td></tr>
     <tr><td class="paramname">i</td><td>Index of the object (index must be between 0 and the number of constraints -1). </td></tr>
   </table>
   </dd>
