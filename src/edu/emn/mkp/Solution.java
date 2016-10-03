@@ -218,7 +218,7 @@ public class Solution {
     }
 
     /**
-     * Remove item j to the knapsack (do nothing if item is already in the knapsack).
+     * Remove item j from the knapsack (do nothing if item j is not in the knapsack).
      * Update the objective value and the weights on each dimension
      * 
      * @param j Index of item to remove.
